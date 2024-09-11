@@ -1,0 +1,34 @@
+// Define the data source for Prisma, specifying PostgreSQL as the database provider
+datasource db {
+  provider = "postgresql" // Database provider type (PostgreSQL)
+  url      = env("DATABASE_URL") // Connection URL from environment variables
+}
+
+// Configure the Prisma Client generator
+generator client {
+  provider = "prisma-client-js" // The Prisma Client JavaScript generator
+}
+
+// Define the user_info model, which maps to a table in the database
+model user_info {
+  id        Int      @id @default(autoincrement()) // Unique identifier for the order (auto-incremented integer)
+  user_first_name     String
+  user_last_name   String
+  user_password     String
+  user_email   String   @unique
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+}
+
+// Define the risk_parameters model, which maps to a table in the database
+model risk_parameters {
+  id        Int      @id @default(autoincrement()) // Unique identifier for the order (auto-incremented integer)
+  symbol  String
+  trading_engine_id    String
+  trading_account  String
+  max_short_position    String
+  max_long_position  String
+  max_lot_size    String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+}
